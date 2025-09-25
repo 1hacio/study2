@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('blog/', include('blog.urls')),  # Root URL directs to admin site
-    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),  # Root URL directs to blog app
+    path('admin/', admin.site.urls),      # Root URL directs to admin site
+    path('', include('single_pages.urls')),  
 ]
