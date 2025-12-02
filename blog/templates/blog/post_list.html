@@ -1,10 +1,23 @@
 {% extends 'blog/base.html' %}
-
 {% block main_area %}
-    <h1>Blog</h1>
+
+    <h1>
+        Blog
+        {% if category %}
+            <span class="badge badge-secondary">{{ category }}</span>
+        {% endif %}
+
+        {% if tag %}
+            <i class="fas fa-tags"></i>
+            <span class="badge badge-light">
+                {{ tag }} ({{ tag.post_set.count }})
+            </span>
+        {% endif %}
+    </h1>
+
     {% if post_list.exists %}
         {% for p in post_list %}
-            <div class="card mb-4">
+            <div class="card mb-4" id="post-{{ p.pk }}">
                 {% if p.head_image %}
                     <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head image">
                 {% else %}
@@ -12,16 +25,32 @@
                 {% endif %}
                 
                 <div class="card-body">
+                    {% if p.category %}
+                        <span class="badge badge-secondary float-right">{{ p.category }}</span>
+                    {% else %}
+                        <span class="badge badge-secondary float-right">미분류</span>
+                    {% endif %}
+
                     <h2 class="card-title">{{ p.title }}</h2>
+                    
                     {% if p.hook_text %}
                         <h5 class="text-muted">{{ p.hook_text }}</h5>
                     {% endif %}
-                    <p class="card-text">{{ p.content | truncatewords:45 }}</p>
+                    
+                    {% if p.tags.exists %}
+                        <i class="fas fa-tags"></i>
+                        {% for t in p.tags.iterator %}
+                            <a href="{{ t.get_absolute_url }}"><span class="badge badge-pill badge-light">{{ t }}</span></a>
+                        {% endfor %}
+                        <br/><br/>
+                    {% endif %}
+
+                    <p class="card-text">{{ p.content | striptags | truncatewords:45 }}</p>
                     <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
-                    Posted on {{ p.created }} by
-                    <a href="#">작성자명 쓸 위치(개발예정)</a>
+                    Posted on {{ p.created_at }} by
+                    <a href="#">{{ p.author | default_if_none:"익명" }}</a>
                 </div>
             </div>
         {% endfor %}
@@ -37,4 +66,5 @@
             <a class="page-link" href="#">Newer &rarr;</a>
         </li>
     </ul>
+
 {% endblock %}
