@@ -1,5 +1,13 @@
 {% extends 'blog/base.html' %}
+
 {% block main_area %}
+
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn-info btn-sm float-right" href="/blog/create_post/"
+            role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
+        {% endif %}
+    {% endif %}
 
     <h1>
         Blog
@@ -17,6 +25,7 @@
 
     {% if post_list.exists %}
         {% for p in post_list %}
+        <!-- Blog Post -->
             <div class="card mb-4" id="post-{{ p.pk }}">
                 {% if p.head_image %}
                     <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head image">
@@ -36,21 +45,22 @@
                     {% if p.hook_text %}
                         <h5 class="text-muted">{{ p.hook_text }}</h5>
                     {% endif %}
+                    <p class="card-text">{{ p.get_content_markdown | truncatewords_html:45 | safe }}</p>
                     
                     {% if p.tags.exists %}
                         <i class="fas fa-tags"></i>
-                        {% for t in p.tags.iterator %}
+                        {% for t in p.tags.all %}
                             <a href="{{ t.get_absolute_url }}"><span class="badge badge-pill badge-light">{{ t }}</span></a>
                         {% endfor %}
-                        <br/><br/>
+                        <br/>
+                        <br/>
                     {% endif %}
 
-                    <p class="card-text">{{ p.content | striptags | truncatewords:45 }}</p>
                     <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ p.created_at }} by
-                    <a href="#">{{ p.author | default_if_none:"익명" }}</a>
+                    <a href="#">{{ p.author | upper }}</a>
                 </div>
             </div>
         {% endfor %}
@@ -58,6 +68,7 @@
         <h3>아직 게시물이 없습니다.</h3>
     {% endif %}
 
+    <!-- Pagination -->
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
             <a class="page-link" href="#">&larr; Older</a>

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 from .models import Post, Category, Tag
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -7,6 +8,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
 
-admin.site.register(Post)
+admin.site.register(Post, MarkdownxModelAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
