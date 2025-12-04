@@ -43,8 +43,6 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
-        author_name = self.author.username if self.author else "익명"
-        category_name = self.category.name if self.category else "None"
         return f'[{self.pk}]{self.title} :: {self.author}' 
 
     def get_absolute_url(self):
@@ -58,9 +56,16 @@ class Post(models.Model):
     
     def get_content_markdown(self):
         return markdown(self.content)
+        
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
-    def get_avatar_url(self):
-        if self.author.socialaccount_set.exists():
-            return self.author.socialaccount_set.first().get_avatar_url()
-        else:
-            return f'https://doitdjango.com/avatar/id/{self.author.id}/svg/{self.author.email}'
+    def __str__(self):
+        return f'{self.author}::{self.content}'
+
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'
