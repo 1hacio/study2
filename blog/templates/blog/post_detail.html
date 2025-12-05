@@ -26,7 +26,8 @@
         <hr>
 
         {% if user.is_authenticated and user == post.author %}
-            <a class="btn btn-info btn-sm float-right" href="/blog/update_post/{{ post.pk }}/" role="button"><i class="fas fa-pen"></i>  Edit Post</a>
+            <a class="btn btn-info btn-sm float-right" href="/blog/update_post/{{ post.pk }}/" role="button">
+                <i class="fas fa-pen"></i>  Edit Post</a>
         {% endif %}
 
         <!-- Date/Time -->
@@ -92,7 +93,8 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 {% else %}
-                    <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+                    <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" 
+                    data-target="#loginModal">Log in and leave a comment</a>
                 {% endif %}
             </div>
         </div>
@@ -101,7 +103,7 @@
             {% for comment in post.comment_set.iterator %}
                 <!-- Single Comment -->
                 <div class="media mb-4" id="comment-{{ comment.pk }}">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <img class="d-flex mr-3 rounded-circle" src="{{ comment.get_avatar_url }}" alt="{{ comment.author }}" width="60px">
                     <div class="media-body">
                         {% if user.is_authenticated and comment.author == user %}
                             <div class="float-right">
@@ -121,7 +123,8 @@
                             </div>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" role="dialog" 
+                                aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
