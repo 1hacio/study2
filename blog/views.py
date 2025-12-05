@@ -10,6 +10,7 @@ from .forms import CommentForm
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    paginate_by = 5
     context_object_name = 'post_list'
 
     def get_context_data(self, **kwargs):
@@ -77,6 +78,8 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             response = super(PostCreate, self).form_valid(form)
             tags_str = self.request.POST.get('tags_str')
 
+            tags_list = []
+
             if tags_str: 
                 tags_str = tags_str.strip()
                 tags_str = tags_str.replace(',', ';')
@@ -122,6 +125,8 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         response = super(PostUpdate, self).form_valid(form)
         self.object.tags.clear() # 기존 태그 삭제 후 다시 등록
         tags_str = self.request.POST.get('tags_str')
+
+        tags_list = []
 
         if tags_str:
             tags_str = tags_str.strip()
