@@ -1,19 +1,197 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개발자 연호입니다.</title>
+    <title>About 지연호</title>
+
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/216f309edf.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav>
-        <a href="/blog">Blog</a>
-        <a href="/about_me/">About_me</a>
-    </nav>
-    <h1>안녕하세요! 개발자 연호입니다.</h1>
-    <h2>이력</h2>
-    <h2>Portfolio</h2>
-    <h3>공사중.</h3>  
+
+{% include 'blog/navbar.html' %}
+
+<section>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>안녕하세요. 지연호입니다.</h1>
+                <br/>
+                <p class="lead">
+                    음악과 컴퓨터와 게임을 좋아합니다.<br/>
+                    학교에서 공부를 하고, 하교 후에는 운동을 하거나 게임을 하면서 지냅니다.
+                </p>
+                <ul>
+                    <li>WORK EXPERIENCE</li>
+                    <ul>
+                        <li>루미컴(주) (2015.10 ~ 2023.06)</li>
+                    </ul>
+                    <br/>
+                    <li>EDUCATION</li>
+                    <ul>
+                        <li>학사, 컴퓨터정보과(CI), 전주비전대학교 (2026.03~)</li>
+                        <li>전문학사, 컴퓨터정보과(CI), 전주비전대학교 (2024.03~2026.02)</li>
+                    </ul>
+                    <br/>
+                    <li>Template</li>
+                    <ul>
+                        <li>DO IT DJANGO, 이지스퍼블리싱 (2020)</li>
+                    </ul>
+                    <br/>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <img class="img-fluid" src="{% static 'single_pages/images/paladog.jpg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light margin-for-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>PORTFOLIO</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#blog">
+                    <img class="card-img-top" src="{% static 'single_pages/images/blog.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">개인 학습 정리 사이트</h5>
+                        <p>php기반으로 작성한 수업 내용 정리 사이트입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#recipe">
+                    <img class="card-img-top" src="{% static 'single_pages/images/recipe.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">식재료 기반 레시피 추천 시스템</h5>
+                        <p>식재료를 기반으로 한 AI 레시피 추천 시스템입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card" data-toggle="modal" data-target="#health">
+                    <img class="card-img-top" src="{% static 'single_pages/images/health.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">운동 회원 관리 시스템</h5>
+                        <p>자바 GUI와 sqlDB연동을 사용해서 만들었습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="blog" tabindex="-1" role="dialog" aria-labelledby="blogModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="blogModalLabel">개인 학습 정리 사이트</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/blog.jpg' %}">
+                    </div>
+                    <div class="col-lg-5">
+                        <p>php기반으로 작성한 수업 내용 정리 사이트입니다.</p>
+                        <a href="http://a.loti.kr/index.php" target="_blank" class="btn btn-light" role="button">
+                            <i class="fas fa-chalkboard-teacher"></i> 사이트
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="recipe" tabindex="-1" role="dialog" aria-labelledby="recipeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recipeModalLabel">식재료 기반 레시피 추천 시스템</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/recipe.jpg' %}">
+                    </div>
+                    <div class="col-lg-5">
+                        <p>식재료를 기반으로 한 AI 레시피 추천 시스템입니다. 프론트는 svelte, 백엔드는 spring, DB는 mysql을 사용했고 백엔드를 맡았습니다.</p>
+                        <a href="https://github.com/1hacio/recipe" target="_blank" class="btn btn-light" role="button">
+                            <i class="fas fa-chalkboard-teacher"></i> 깃허브
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="health" tabindex="-1" role="dialog" aria-labelledby="healthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="healthModalLabel">운동 회원 관리 시스템</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/health.jpg' %}">
+                    </div>
+                    <div class="col-lg-5">
+                        <p>chatGPT의 도움과 수업 시간에 작성한 자료를 기준으로 자바 GUI와 sqlDB연동을 사용해서 만들었습니다.</p>
+                        <a href="https://github.com/1hacio/Health" target="_blank" class="btn btn-light" role="button">
+                            <i class="fas fa-chalkboard-teacher"></i> 깃허브
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-bottom">
+    {% include 'blog/footer.html' %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
